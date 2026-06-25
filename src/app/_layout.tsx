@@ -1,15 +1,24 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
-import { useColorScheme } from 'react-native';
-
-import { AnimatedSplashOverlay } from '@/components/animated-icon';
-import AppTabs from '@/components/app-tabs';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+import React from "react";
+import { View, StyleSheet } from "react-native";
+import { Slot } from "expo-router";
+import MyHeader from "../components/MyHeader";
+import MyFooter from "../components/MyFooter";
+export default function RootLayout() {
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <AnimatedSplashOverlay />
-      <AppTabs />
-    </ThemeProvider>
+    <View style={styles.container}>
+      <MyHeader />
+      
+      {/* The Slot component acts as a placeholder for your child screens */}
+      <View style={styles.content}>
+        <Slot />
+      </View>
+
+      <MyFooter />
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: "#f5f5f5" },
+  content: { flex: 1 }
+});
